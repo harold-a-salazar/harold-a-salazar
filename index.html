@@ -569,7 +569,7 @@
 <body>
   <noscript><p style="padding:16px;text-align:center;font-family:Arial,sans-serif">Please turn on JavaScript to view this profile.</p></noscript>
   <div class="boot" id="boot" role="status" aria-live="polite"><span class="spin" aria-hidden="true"></span><span>Loading profile&hellip;</span></div>
-  <div id="app"></div>
+  <div id="profileRoot"></div>
 
   <script>
     /* ===== Where the profile data comes from =====
@@ -844,7 +844,7 @@ __o += "</figcaption>\n              </figure>\n            ";
  }); 
 __o += "\n          </div>\n          ";
  if (aimgs.length > 1) { 
-__o += "\n          <div class=\"ctrl\">\n            <button type=\"button\" class=\"nav prev\" id=\"aprev\" aria-label=\"Previous award\">&#8249;</button>\n            <div class=\"dots\" id=\"adots\"></div>\n            <button type=\"button\" class=\"nav pp\" id=\"app\" aria-label=\"Pause auto-play\" title=\"Pause auto-play\"></button>\n            <button type=\"button\" class=\"nav next\" id=\"anext\" aria-label=\"Next award\">&#8250;</button>\n          </div>\n          ";
+__o += "\n          <div class=\"ctrl\">\n            <button type=\"button\" class=\"nav prev\" id=\"aprev\" aria-label=\"Previous award\">&#8249;</button>\n            <div class=\"dots\" id=\"adots\"></div>\n            <button type=\"button\" class=\"nav pp\" id=\"awardsPP\" aria-label=\"Pause auto-play\" title=\"Pause auto-play\"></button>\n            <button type=\"button\" class=\"nav next\" id=\"anext\" aria-label=\"Next award\">&#8250;</button>\n          </div>\n          ";
  } 
 __o += "\n        </div>\n        ";
  } 
@@ -1709,7 +1709,7 @@ return __o;
       var aItems = [].slice.call(document.querySelectorAll('li.award.has-img'));
       initCarousel('atrack', 'adots', 'aprev', 'anext', function (cur) {
         aItems.forEach(function (li) { li.classList.toggle('on', +li.getAttribute('data-ai') === cur); });
-      }, { auto: 4500, pp: 'app' });
+      }, { auto: 4500, pp: 'awardsPP' });
       function showAward(li) {
         var t = $('atrack'); if (!t) return;
         t.scrollTo({ left: +li.getAttribute('data-ai') * t.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
@@ -1764,7 +1764,7 @@ return __o;
     }
 
     (function () {
-      var KEY = 'profile:data:v1', boot = document.getElementById('boot'), app = document.getElementById('app');
+      var KEY = 'profile:data:v1', boot = document.getElementById('boot'), app = document.getElementById('profileRoot');
       var started = false, startedAt = 0;
       function start(p) {
         if (started) return; started = true; startedAt = Date.now();
